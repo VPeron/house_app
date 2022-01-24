@@ -1,7 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
-from modules.params import FRONT_PASSWORD
+# from modules.params import FRONT_PASSWORD
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
 
 
