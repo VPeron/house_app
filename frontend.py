@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 from modules.params import FRONT_PASSWORD
-# FRONT_PASSWORD = '12345'
+FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
 
 
 st.set_page_config(page_title='House Page', page_icon="🔒", layout='wide')
@@ -16,7 +16,7 @@ def front_door():
     
     with main_col_2:
         front_placeholder = st.empty()
-        front_placeholder.title('.<_° ☘ « ※ » ☮ ♡ ⚤ «♚۞ ♠🔒♠ ۞♚» ☮ ♡ ⚤ « ※ » ☘ °_>.')
+        front_placeholder.title(' ☘ « ※ » ♠🔒♠ « ※ » ☘')
         ## AUTHENTICATION ##
         placeholder = st.empty() 
         input_password = placeholder.text_input(' 🔑 :', value='', type='password')
@@ -38,7 +38,7 @@ def front_door():
 
 
 def home_page():
-    st.title('Home Page')
+    st.title('☘ « ※ » ☮ ♡ ⚤ «♚۞ ♠ Home Page ♠ ۞♚» ☮ ♡ ⚤ « ※ » ☘')
     
 
 def first_page():

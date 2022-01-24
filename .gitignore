@@ -1,3 +1,4 @@
 modules/params.py
 *.csv
 *.pyc
+params.py
