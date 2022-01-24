@@ -23,7 +23,6 @@ def front_door():
         if input_password:
             if input_password == FRONT_PASSWORD:
                 session_state = True
-                placeholder.success('Getting you there!')
                     
                 front_placeholder.empty()
                 placeholder.empty()
