@@ -1,11 +1,15 @@
 import streamlit as st
 from datetime import datetime
+# import gspread
+import pandas as pd
+# from gsheetsdb import connect
 
-# from modules.params import FRONT_PASSWORD
+
+PRESENT_DATE = datetime.today()
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
+current_sheet = st.secrets["current_sheet"]
 
-
-st.set_page_config(page_title='House Page', page_icon="🔒", layout='wide')
+st.set_page_config(page_title='House Page', page_icon="🔒", layout='centered')
 
 def front_door():
     session_state = False
@@ -36,21 +40,24 @@ def front_door():
 
     return session_state
 
-
+    
 def home_page():
-    st.title('☘ « ※ » ☮ ♡ ⚤ «♚۞ ♠ Home Page ♠ ۞♚» ☮ ♡ ⚤ « ※ » ☘')
+    st.title('☘«※»☮♡⚤«♚♠ Home Page ♠♚»☮♡⚤«※»☘')
+    st.write(str(PRESENT_DATE)[:10])
     
 
 def first_page():
     st.title('First Page')
-
+   
 
 def about_page():
     st.title('About')
-    
+
+
 
 def contact_page():
     st.title('Contact')
+    st.info("viperon.python@gmail.com")
         
 
 def main():
@@ -71,4 +78,5 @@ if __name__ == "__main__":
     
     if base_auth:
         main()
+        
     

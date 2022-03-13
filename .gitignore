@@ -2,3 +2,5 @@ modules/params.py
 *.csv
 *.pyc
 params.py
+.streamlit/secrets.toml
+feat_dev/
