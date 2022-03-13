@@ -1,12 +1,7 @@
 import streamlit as st
-from datetime import datetime
-# import gspread
-import pandas as pd
-# from gsheetsdb import connect
-from modules.weather_backend import get_weather
+from modules.weather_backend import get_weather, get_date_time
 
 
-PRESENT_DATE = datetime.today()
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
 current_sheet = st.secrets["current_sheet"]
 
@@ -43,13 +38,17 @@ def front_door():
 
 
 def home_page():
-    st.title('☘«※»☮♡⚤«♚♠ Home Page ♠♚»☮♡⚤«※»☘')
-    st.write(str(PRESENT_DATE)[:10])
+    date_today, time_now = get_date_time()
+    st.title('☘♡⚤«♚♠ Home Page ♠♚»☮♡☘')
+    st.info(date_today)
     city = st.selectbox("Select a city", ['Berlin', 'Sao Paulo', 'Alicante'])
     if city:
         try:
             current_temperature, feels_like, weather_description = get_weather(city)
-            st.info(f"{city}, Temperature:{current_temperature}, Feels like {feels_like}, {weather_description}")
+            st.info(f"""{city}\n
+Temperature:{current_temperature}\n
+Feels like {feels_like}\n
+{weather_description}""")
         except KeyError:
             st.error('There was an error (KeyError), please try again.')
     
