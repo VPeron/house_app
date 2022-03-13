@@ -3,6 +3,7 @@ from datetime import datetime
 # import gspread
 import pandas as pd
 # from gsheetsdb import connect
+from modules.weather_backend import get_weather
 
 
 PRESENT_DATE = datetime.today()
@@ -40,10 +41,17 @@ def front_door():
 
     return session_state
 
-    
+
 def home_page():
     st.title('☘«※»☮♡⚤«♚♠ Home Page ♠♚»☮♡⚤«※»☘')
     st.write(str(PRESENT_DATE)[:10])
+    city = st.selectbox("Select a city", ['Berlin', 'Sao Paulo', 'Alicante'])
+    if city:
+        try:
+            current_temperature, feels_like, weather_description = get_weather(city)
+            st.info(f"{city}, Temperature:{current_temperature}, Feels like {feels_like}, {weather_description}")
+        except KeyError:
+            st.error('There was an error (KeyError), please try again.')
     
 
 def first_page():
