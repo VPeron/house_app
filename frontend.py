@@ -3,7 +3,6 @@ from modules.weather_backend import get_weather, get_date_time
 
 
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
-current_sheet = st.secrets["current_sheet"]
 
 st.set_page_config(page_title='House Page', page_icon="🔒", layout='centered')
 

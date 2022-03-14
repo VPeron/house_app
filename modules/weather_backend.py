@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime
 from time import sleep
-
+import streamlit as st
 
 
 def get_date_time():
@@ -12,8 +12,7 @@ def get_date_time():
 
  
 def get_weather(city_name):
-    
-    api_key = "0db480ddbcf049359fc24615ce7faaf5"
+    api_key = st.secrets['API_KEY']
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&" + "units=metric"
     response = requests.get(complete_url)
@@ -31,20 +30,3 @@ def get_weather(city_name):
         print(" City Not Found ")
     
     return current_temperature, feels_like, weather_description
-
-
-
-# if __name__ == "__main__":
-#     cities = ['Berlin', 'Sao Paulo', 'Alicante']
-#     print(f"weather log running every hour for {[i for i in cities]}")
-    
-#     loop_count = 0
-#     while True:
-#         date_today, time_now = get_date_time()
-#         if time_now.endswith(':30'):
-#             for city in cities:
-#                 current_temperature, feels_like, weather_description = get_weather(city)
-            
-#         loop_count += 1
-#         print(time_now, f" - loop {loop_count}")
-#         sleep(60)
