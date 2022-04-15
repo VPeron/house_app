@@ -59,7 +59,7 @@ Feels like {feels_like}\n
     
 
 def first_page():
-    st.title('First Page')
+    st.title('Crypto Data')
     start = dt.datetime(2020,1,1)
     end = dt.datetime.now()
     coins = ['Bitcoin', 'Ethereum', 'Monero']
@@ -96,7 +96,7 @@ def main():
     # Register your pages
     pages = {
         "Homepage": home_page,
-        "First Page": first_page,
+        "Crypto Data": first_page,
         "About": about_page,
         "Contact": contact_page,
     }
