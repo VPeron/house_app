@@ -3,6 +3,7 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 import seaborn as sns
+import logging
 
 
 from modules.weather_backend import get_weather, get_date_time
@@ -33,6 +34,7 @@ def front_door():
                 placeholder.empty()
             else:
                 placeholder.image('https://www.how-to-draw-funny-cartoons.com/image-files/cartoon-chair-6.gif')
+                logging.warning("Failed login attempt.")
                 session_state = False
                 st.stop()
         
