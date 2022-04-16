@@ -58,6 +58,7 @@ Feels like {feels_like}\n
 {weather_description}""")
         except KeyError:
             st.error('There was an error (KeyError), please try again.')
+            logging.warning('Weather widget Key error.')
     
 
 def first_page():
