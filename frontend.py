@@ -54,7 +54,7 @@ def front_door():
 def home_page():
     date_today, time_now = get_date_time()
     # st.title('☘♡⚤«♚♠ Home Page ♠♚»☮♡☘')
-    st.info(f"{date_today} {time_now}")
+    st.info(f"{date_today} at {time_now}")
     city = st.sidebar.selectbox("Select a city", ['Berlin', 'Sao Paulo', 'Alicante'])
     if city:
         try:
@@ -85,6 +85,7 @@ Feels like: {feels_like}\n
 
 def crypto_page():
     st.title('Crypto Data')
+    st.sidebar.image('https://wallpapercave.com/wp/wp4678546.jpg')
     start = dt.datetime(2020,1,1)
     end = dt.datetime.now()
     coins = ['Bitcoin', 'Ethereum', 'Monero']
@@ -109,6 +110,7 @@ def crypto_page():
 
 def about_page():
     st.title('About')
+    st.sidebar.write('[Github](https://github.com/VPeron/house_app)')
     st.info("""
             Family playground.
             """)
