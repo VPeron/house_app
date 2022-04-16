@@ -8,10 +8,17 @@ import logging
 
 from modules.weather_backend import get_weather, get_date_time
 from modules.crypto_backend import get_currency_data
+from modules.schedule_backend import get_schedule_data, apply_style
 
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
 
 st.set_page_config(page_title='House Page', page_icon="🔒", layout='centered')
+
+# to configure the logger further you can use basicConfig()
+# but if this gets more complex its better to also implement a handler.
+# logging.basicConfig(filename='request_site_status.log', level=logging.DEBUG,
+#                     format='%(asctime)s:%(name)s:%(message)s')
+# logging.debug(f'Display debug message.')
 
 def front_door():
     session_state = False
@@ -52,13 +59,28 @@ def home_page():
     if city:
         try:
             current_temperature, feels_like, weather_description = get_weather(city)
-            st.info(f"""{city}\n
+            st.sidebar.info(f"""{city}\n
 Temperature:{current_temperature}\n
 Feels like {feels_like}\n
 {weather_description}""")
         except KeyError:
             st.error('There was an error (KeyError), please try again.')
             logging.warning('Weather widget Key error.')
+    
+    st.title('Schedule')
+    # CSS to inject contained in a string
+    hide_table_row_index = """
+                <style>
+                tbody th {display:none}
+                .blank {display:none}
+                </style>
+                """
+
+    # Inject CSS with Markdown
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    data = get_schedule_data()
+    df = pd.DataFrame(data)
+    apply_style(df)
     
 
 def crypto_page():

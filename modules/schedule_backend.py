@@ -1,0 +1,59 @@
+import streamlit as st
+from gsheetsdb import connect
+
+
+@st.cache(ttl=600)
+def run_query(query):
+    # Create a connection object.
+    conn = connect()
+    rows = conn.execute(query, headers=1)
+    rows = rows.fetchall()
+    return rows
+
+def get_schedule_data():
+    sheet_url = st.secrets["public_sheet"]
+    rows = run_query(f'SELECT * FROM "{sheet_url}"')
+    data = {
+        'day':[],
+        'Mon':[],
+        'Tue':[],
+        'Wed':[],
+        'Thu':[],
+        'Fri':[],
+        'Sat':[],
+        'Sun':[],
+        'notes':[],
+    }
+    for row in rows[:9]:
+        data['day'].append(row.day)
+        data['Mon'].append(row.Mon_b)
+        data['Tue'].append(row.Tue_c)
+        data['Wed'].append(row.Wed_d)
+        data['Thu'].append(row.Thu_e)
+        data['Fri'].append(row.Fri_f)
+        data['Sat'].append(row.Sat_g)
+        data['Sun'].append(row.Sun_h)
+        data['notes'].append(row.notes)
+    return data
+
+
+def highlight_rows(x):
+    df = x.copy()
+    # keep default black bkground
+    df.loc[:, :] = 'background-color: black'
+    # overwrite values grey color
+    df.iloc[3, :-1] = 'background-color: blue'   # lunch column
+    df.iloc[6, :-1] = 'background-color: blue'   # dinner column
+    return df 
+
+
+def apply_color(val, text_color, param):
+    color = text_color if val == param else None
+    return f'color: {color}'
+
+
+def apply_style(df):        
+    colored_df = df.style.applymap(apply_color, param='Conny+O', text_color='yellow')\
+    .applymap(apply_color, param='Kita', text_color='orange')\
+        .applymap(lambda x: "background-color: gray" if x == 'Vini+O' else None).apply(highlight_rows, axis = None) 
+    st.table(colored_df)
