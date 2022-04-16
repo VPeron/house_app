@@ -1,6 +1,7 @@
 import streamlit as st
 from gsheetsdb import connect
 
+SHEET_URL = st.secrets["public_sheet"]
 
 @st.cache(ttl=600)
 def run_query(query):
@@ -11,8 +12,7 @@ def run_query(query):
     return rows
 
 def get_schedule_data():
-    sheet_url = st.secrets["public_sheet"]
-    rows = run_query(f'SELECT * FROM "{sheet_url}"')
+    rows = run_query(f'SELECT * FROM "{SHEET_URL}"')
     data = {
         'day':[],
         'Mon':[],
@@ -42,8 +42,8 @@ def highlight_rows(x):
     # keep default black bkground
     df.loc[:, :] = 'background-color: black'
     # overwrite values grey color
-    df.iloc[3, :-1] = 'background-color: blue'   # lunch column
-    df.iloc[6, :-1] = 'background-color: blue'   # dinner column
+    df.iloc[3, :-1] = 'background-color: blue'   # lunch row
+    df.iloc[6, :-1] = 'background-color: blue'   # dinner row
     return df 
 
 

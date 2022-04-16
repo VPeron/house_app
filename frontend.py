@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import logging
 
-
 from modules.weather_backend import get_weather, get_date_time
 from modules.crypto_backend import get_currency_data
 from modules.schedule_backend import get_schedule_data, apply_style
+
 
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
 
@@ -53,15 +53,15 @@ def front_door():
 
 def home_page():
     date_today, time_now = get_date_time()
-    st.title('☘♡⚤«♚♠ Home Page ♠♚»☮♡☘')
-    st.info(date_today)
+    # st.title('☘♡⚤«♚♠ Home Page ♠♚»☮♡☘')
+    st.info(f"{date_today} {time_now}")
     city = st.sidebar.selectbox("Select a city", ['Berlin', 'Sao Paulo', 'Alicante'])
     if city:
         try:
             current_temperature, feels_like, weather_description = get_weather(city)
             st.sidebar.info(f"""{city}\n
-Temperature:{current_temperature}\n
-Feels like {feels_like}\n
+Temperature: {current_temperature}\n
+Feels like: {feels_like}\n
 {weather_description}""")
         except KeyError:
             st.error('There was an error (KeyError), please try again.')
