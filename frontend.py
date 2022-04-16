@@ -61,7 +61,7 @@ Feels like {feels_like}\n
             logging.warning('Weather widget Key error.')
     
 
-def first_page():
+def crypto_page():
     st.title('Crypto Data')
     start = dt.datetime(2020,1,1)
     end = dt.datetime.now()
@@ -87,7 +87,10 @@ def first_page():
 
 def about_page():
     st.title('About')
-
+    st.info("""
+            Personal playground.
+            """)
+    st.image("https://wp-media.patheos.com/blogs/sites/576/2088/01/matrix-city.jpg")
 
 
 def contact_page():
@@ -99,7 +102,7 @@ def main():
     # Register your pages
     pages = {
         "Homepage": home_page,
-        "Crypto Data": first_page,
+        "Crypto Data": crypto_page,
         "About": about_page,
         "Contact": contact_page,
     }
