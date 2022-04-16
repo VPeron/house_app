@@ -1,11 +1,9 @@
 import requests
 from datetime import datetime
-from time import sleep
 import streamlit as st
 
 
 def get_date_time():
-    
     date_today = str(datetime.now())[:10]
     time_now = str(datetime.now())[11:16]
     return date_today, time_now
@@ -27,6 +25,5 @@ def get_weather(city_name):
         z = x["weather"]
         weather_description = z[0]["description"]
     except KeyError:
-        print(" City Not Found ")
-    
+        print(" City Not Found ")  
     return current_temperature, feels_like, weather_description

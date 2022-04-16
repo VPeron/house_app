@@ -99,7 +99,6 @@ def crypto_page():
         state_menu = st.selectbox('Select a view', ['Open', 'Close', 'Low', 'High', 'Volume'])
         if state_menu:
             df = pd.DataFrame(crypto_data[coin_menu][state_menu])
-            # st.write(df)
             st.title(f"{coin_menu}")
             fig, ax = plt.subplots(figsize=(15,8))
             plt.title(f'{str(start)[:10]} until {str(end)[:10]} {coin_menu} - {state_menu}')
@@ -137,8 +136,5 @@ def main():
     
 if __name__ == "__main__":
     base_auth = front_door()
-    
     if base_auth:
         main()
-        
-    

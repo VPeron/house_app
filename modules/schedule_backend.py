@@ -1,11 +1,11 @@
 import streamlit as st
 from gsheetsdb import connect
 
+
 SHEET_URL = st.secrets["public_sheet"]
 
 @st.cache(ttl=600)
 def run_query(query):
-    # Create a connection object.
     conn = connect()
     rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
