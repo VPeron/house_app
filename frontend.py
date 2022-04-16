@@ -55,7 +55,7 @@ def home_page():
     date_today, time_now = get_date_time()
     st.title('☘♡⚤«♚♠ Home Page ♠♚»☮♡☘')
     st.info(date_today)
-    city = st.selectbox("Select a city", ['Berlin', 'Sao Paulo', 'Alicante'])
+    city = st.sidebar.selectbox("Select a city", ['Berlin', 'Sao Paulo', 'Alicante'])
     if city:
         try:
             current_temperature, feels_like, weather_description = get_weather(city)
@@ -110,7 +110,7 @@ def crypto_page():
 def about_page():
     st.title('About')
     st.info("""
-            Personal playground.
+            Family playground.
             """)
     st.image("https://wp-media.patheos.com/blogs/sites/576/2088/01/matrix-city.jpg")
 
