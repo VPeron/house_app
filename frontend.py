@@ -86,12 +86,13 @@ Feels like: {feels_like}\n
 
 def news_page():
     st.title("News")
+    st.sidebar.image('https://nsiteam.com/social/wp-content/uploads/2016/12/Depositphotos_19723583_m-2015-930x698.jpg')
     search_news = st.text_input("Keyword search NewsApi:")
     if search_news:
         get_news_api(search_news)
     
     view_all_sources = st.checkbox('view all sources')
-    st.warning('Current Filter: bbc-news,the-verge,bloomberg,hacker-news,wired,die-zeit,der-tagesspiegel')
+    st.sidebar.info('Current Filter: bbc-news,the-verge,bloomberg,hacker-news,wired,die-zeit,der-tagesspiegel')
     if view_all_sources:
         view_sources()
 

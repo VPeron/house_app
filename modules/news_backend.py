@@ -22,7 +22,7 @@ def get_news_api(search_news):
     
     # debugger
     # st.write(all_articles["articles"][0])
-    st.header(f"{len(all_articles['articles'])} results for: {search_news}")
+    st.sidebar.header(f"{len(all_articles['articles'])} results for: {search_news}")
     for i in range(len(all_articles['articles'])):
         try:
             st.header(all_articles['articles'][i]['title'])
