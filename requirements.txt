@@ -4,3 +4,4 @@ gsheetsdb
 pandas_datareader
 matplotlib
 seaborn
+newsapi-python

@@ -8,6 +8,7 @@ import logging
 from modules.weather_backend import get_weather, get_date_time
 from modules.crypto_backend import get_currency_data
 from modules.schedule_backend import get_schedule_data, apply_style
+from modules.news_backend import get_news_api, view_sources
 
 
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
@@ -83,6 +84,18 @@ Feels like: {feels_like}\n
     apply_style(df)
     
 
+def news_page():
+    st.title("News")
+    search_news = st.text_input("Keyword search NewsApi:")
+    if search_news:
+        get_news_api(search_news)
+    
+    view_all_sources = st.checkbox('view all sources')
+    st.warning('Current Filter: bbc-news,the-verge,bloomberg,hacker-news,wired,die-zeit,der-tagesspiegel')
+    if view_all_sources:
+        view_sources()
+
+
 def crypto_page():
     st.title('Crypto Data')
     st.sidebar.image('https://wallpapercave.com/wp/wp4678546.jpg')
@@ -125,6 +138,7 @@ def main():
     # Register your pages
     pages = {
         "Homepage": home_page,
+        "News": news_page,
         "Crypto Data": crypto_page,
         "About": about_page,
         "Contact": contact_page,
