@@ -3,7 +3,7 @@ import pandas as pd
 import logging
 
 from modules.weather_backend import get_weather, get_date_time
-from modules.crypto_backend import monitoring_ranges, plot_data
+from modules.crypto_backend import monitor_ranges, plot_data
 from modules.schedule_backend import get_schedule_data, apply_style
 from modules.news_backend import get_news_api, view_sources
 
@@ -97,7 +97,7 @@ def news_page():
 def crypto_page():
     st.title('Crypto Data')
     st.sidebar.image('https://wallpapercave.com/wp/wp4678546.jpg')
-    crypto_data = monitoring_ranges()
+    crypto_data = monitor_ranges()
     plot_data(crypto_data)
    
 

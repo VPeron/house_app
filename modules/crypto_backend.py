@@ -24,7 +24,7 @@ def get_currency_data(currency):
     return currency
 
 
-def monitoring_ranges():
+def monitor_ranges():
     st.header('Monitoring Ranges')
     coin_range_alert = {
         'Bitcoin': {'Min':35000, 'Max':45000},
