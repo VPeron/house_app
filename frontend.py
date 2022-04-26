@@ -1,12 +1,9 @@
 import streamlit as st
 import pandas as pd
-import datetime as dt
-import matplotlib.pyplot as plt
-import seaborn as sns
 import logging
 
 from modules.weather_backend import get_weather, get_date_time
-from modules.crypto_backend import get_currency_data
+from modules.crypto_backend import monitoring_ranges, plot_data
 from modules.schedule_backend import get_schedule_data, apply_style
 from modules.news_backend import get_news_api, view_sources
 
@@ -100,25 +97,8 @@ def news_page():
 def crypto_page():
     st.title('Crypto Data')
     st.sidebar.image('https://wallpapercave.com/wp/wp4678546.jpg')
-    start = dt.datetime(2020,1,1)
-    end = dt.datetime.now()
-    coins = ['Bitcoin', 'Ethereum', 'Monero']
-    crypto_data = {}
-    for coin in coins:
-        data = get_currency_data(coin, start)
-        crypto_data[coin] = data
-    
-    coin_menu = st.selectbox('Select a coin', crypto_data.keys())
-    if coin_menu:
-        state_menu = st.selectbox('Select a view', ['Open', 'Close', 'Low', 'High', 'Volume'])
-        if state_menu:
-            df = pd.DataFrame(crypto_data[coin_menu][state_menu])
-            st.title(f"{coin_menu}")
-            fig, ax = plt.subplots(figsize=(15,8))
-            plt.title(f'{str(start)[:10]} until {str(end)[:10]} {coin_menu} - {state_menu}')
-            sns.lineplot(x=df.index, y=df[state_menu], data=df)
-            plt.grid()
-            st.pyplot(fig)
+    crypto_data = monitoring_ranges()
+    plot_data(crypto_data)
    
 
 def about_page():
