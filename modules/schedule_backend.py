@@ -55,5 +55,5 @@ def apply_color(val, text_color, param):
 def apply_style(df):        
     colored_df = df.style.applymap(apply_color, param='Conny+O', text_color='yellow')\
     .applymap(apply_color, param='Kita', text_color='orange')\
-        .applymap(lambda x: "background-color: gray" if x == 'Vini+O' else None).apply(highlight_rows, axis = None) 
+        .applymap(lambda x: "background-color: green" if x == 'Vini+O' else None).apply(highlight_rows, axis = None) 
     st.table(colored_df)
