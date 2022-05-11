@@ -6,6 +6,7 @@ from modules.weather_backend import get_weather, get_date_time
 from modules.crypto_backend import monitor_ranges, plot_data
 from modules.schedule_backend import get_schedule_data, apply_style
 from modules.news_backend import get_news_api, view_sources
+from modules.comdirect_backend import get_comd_data, pre_proc_data ,plot_monthly_data
 
 
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
@@ -99,6 +100,27 @@ def crypto_page():
     st.sidebar.image('https://wallpapercave.com/wp/wp4678546.jpg')
     crypto_data = monitor_ranges()
     plot_data(crypto_data)
+    
+
+def comd_page():
+    raw_df = get_comd_data()
+    df = pre_proc_data(raw_df)
+    
+    years_available = set(df['Date'].dt.year.to_list())
+    select_year = st.selectbox('Choose a year', years_available)
+    df_year = df[df['Date'].dt.year == select_year]
+    
+    months_available = set(df_year['Date'].dt.month_name().to_list())
+    select_month = st.selectbox('Choose a month', months_available)
+    df_month = df_year[df_year['Date'].dt.month_name() == select_month]
+    
+    transactions = st.checkbox('View transactions')
+    if transactions:
+        st.write(df_month)
+    st.header('Summary Table')
+    month_summary = df_month.groupby('Labels').agg('Amount').sum()
+    st.write(month_summary)
+    plot_monthly_data(month_summary, select_month, select_year)
    
 
 def about_page():
@@ -121,6 +143,7 @@ def main():
         "Homepage": home_page,
         "News": news_page,
         "Crypto Data": crypto_page,
+        "Comdirect":comd_page,
         "About": about_page,
         "Contact": contact_page,
     }
