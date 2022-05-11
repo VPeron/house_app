@@ -6,7 +6,6 @@ import seaborn as sns
 
 
 COMD_SHEET_URL = st.secrets["comd_sheet"]
-# COMD_SHEET_URL = "https://docs.google.com/spreadsheets/d/1i5hzdlVQCKqfuuHKw1tMLgcfKyblh418xiP1wywlBzk/edit?usp=sharing"
 
 
 @st.cache(ttl=600)
