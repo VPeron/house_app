@@ -4,21 +4,22 @@ from datetime import datetime, timedelta
 from PIL import UnidentifiedImageError
 
 
-news_api_key = st.secrets["NEWS_API_KEY"]
+NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
 
 def get_news_api(search_news):
     date_today = datetime.today()
     a_month_ago = date_today - timedelta(days = 30)
     # Init
-    newsapi = NewsApiClient(news_api_key)
-    all_articles = newsapi.get_everything(q=f'{search_news}',
-                                        sources='bbc-news,the-verge,bloomberg,hacker-news,wired,die-zeit,der-tagesspiegel',
-                                        domains='bbc.co.uk,techcrunch.com,bloomberg.com,news.ycombinator.com,wired.com,zeit.de,tagesspiegel.de',
-                                        from_param=a_month_ago,
-                                        to=date_today,
-                                        language='en',
-                                        sort_by='relevancy',
-                                        page=2)
+    newsapi = NewsApiClient(NEWS_API_KEY)
+    all_articles = newsapi.get_everything(
+        q=f'{search_news}',
+        sources='bbc-news,the-verge,bloomberg,hacker-news,wired,wired-de,el-mundo,die-zeit,der-tagesspiegel',
+        domains='bbc.co.uk,techcrunch.com,bloomberg.com,news.ycombinator.com,wired.com,Wired.de,elmundo.es,zeit.de,tagesspiegel.de',
+        from_param=a_month_ago,
+        to=date_today,
+        language='en',
+        sort_by='relevancy',
+        page=2)
     
     # debugger
     # st.write(all_articles["articles"][0])
@@ -40,7 +41,7 @@ def get_news_api(search_news):
 
 def view_sources():
     # /v2/top-headlines/sources
-    newsapi = NewsApiClient(news_api_key)
+    newsapi = NewsApiClient(NEWS_API_KEY)
     sources = newsapi.get_sources()
     st.header("SOURCES")
     st.table(sources["sources"])

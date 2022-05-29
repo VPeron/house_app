@@ -90,7 +90,7 @@ def news_page():
         get_news_api(search_news)
     
     view_all_sources = st.checkbox('view all sources')
-    st.sidebar.info('Current Filter: bbc-news,the-verge,bloomberg,hacker-news,wired,die-zeit,der-tagesspiegel')
+    st.sidebar.info('Current Filter: bbc-news,the-verge,bloomberg,hacker-news,wired,wired-de,el-mundo,die-zeit,der-tagesspiegel')
     if view_all_sources:
         view_sources()
 
