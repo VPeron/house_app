@@ -103,6 +103,7 @@ def crypto_page():
     
 
 def comd_page():
+    st.sidebar.image('https://is2-ssl.mzstatic.com/image/thumb/Purple113/v4/86/3e/20/863e2097-3761-df35-0537-4ffb77fd8dc3/source/512x512bb.jpg')
     raw_df = get_comd_data()
     df = pre_proc_data(raw_df)
     
@@ -144,11 +145,11 @@ def main():
         "News": news_page,
         "Crypto Data": crypto_page,
         "Comdirect":comd_page,
-        "About": about_page,
-        "Contact": contact_page,
+        #"About": about_page,
+        #"Contact": contact_page,
     }
     
-    page = st.sidebar.selectbox("Select your page", tuple(pages.keys()))
+    page = st.sidebar.radio("Select your page", tuple(pages.keys()))
     pages[page]()
     
     
