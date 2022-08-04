@@ -1,6 +1,7 @@
 streamlit
 pandas
-gsheetsdb
+#gsheetsdb
+gspread
 pandas_datareader
 matplotlib
 seaborn

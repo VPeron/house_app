@@ -77,9 +77,14 @@ Feels like: {feels_like}\n
 
     # Inject CSS with Markdown
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
-    data = get_schedule_data()
-    df = pd.DataFrame(data)
-    apply_style(df)
+    
+    # data = get_schedule_data()
+    # df = pd.DataFrame(data)
+    # apply_style(df)
+    list_of_lists = get_schedule_data()
+    result_table = pd.DataFrame(list_of_lists)
+    result_table.columns = [i for i in pd.DataFrame(result_table).T[0]]
+    apply_style(result_table[1:])
     
 
 def news_page():
