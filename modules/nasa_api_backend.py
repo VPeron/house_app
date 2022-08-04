@@ -59,4 +59,4 @@ def get_nasa_api_photos():
     
   
 # if __name__ == "__main__":
-#     main()
+#     get_nasa_api_photos()
