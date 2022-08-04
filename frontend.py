@@ -54,6 +54,8 @@ def home_page():
     date_today, time_now = get_date_time()
     # st.title('☘♡⚤«♚♠ Home Page ♠♚»☮♡☘')
     st.info(f"{date_today} at {time_now}")
+    
+    # WEATHER WIDGET
     city = st.sidebar.selectbox("Select a city", ['Berlin', 'Sao Paulo', 'Alicante'])
     if city:
         try:
@@ -66,8 +68,9 @@ Feels like: {feels_like}\n
             st.error('There was an error (KeyError), please try again.')
             logging.warning('Weather widget Key error.')
     
+    # SCHEDULE WIDGET
     st.title('Schedule')
-    # CSS to inject contained in a string
+    # CSS to inject to remove table index
     hide_table_row_index = """
                 <style>
                 tbody th {display:none}
@@ -78,13 +81,10 @@ Feels like: {feels_like}\n
     # Inject CSS with Markdown
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
     
-    # data = get_schedule_data()
-    # df = pd.DataFrame(data)
-    # apply_style(df)
     list_of_lists = get_schedule_data()
     result_table = pd.DataFrame(list_of_lists)
-    result_table.columns = [i for i in pd.DataFrame(result_table).T[0]]
-    apply_style(result_table[1:])
+    result_table.columns = [i for i in pd.DataFrame(result_table).T[0]] # insert header as table header
+    apply_style(result_table[1:])  # display styled table without duplicated header
     
 
 def news_page():
