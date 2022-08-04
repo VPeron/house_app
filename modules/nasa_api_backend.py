@@ -5,7 +5,7 @@ from datetime import datetime
 import streamlit as st
 
 
-NASA_API_KEY = st.secrets["api_key"]
+NASA_API_KEY = st.secrets["NASA_API_KEY"]
 
 
 def fetchAPOD(date):
