@@ -10,14 +10,12 @@ NASA_API_KEY = st.secrets["NASA_API_KEY"]
 
 def fetchAPOD(date):
     URL_APOD = "https://api.nasa.gov/planetary/apod"
-    
     params = {
         'api_key':NASA_API_KEY,
         'date':date,
         'hd':'True'
     }
     response = requests.get(URL_APOD,params=params).json()
-    #st.write(response)
     try:
         st.write(f'Copyrights: {response["copyright"]}')
     except KeyError:
@@ -28,7 +26,6 @@ def fetchAPOD(date):
     
     image_url = response['url']
     st.image(image_url)
-    
     
     img_data = requests.get(image_url).content
     return img_data
@@ -50,13 +47,4 @@ def get_nasa_api_photos():
     st.header("Select a date to fetch photo for that day")
     date_selection = st.date_input("Date selection", max_value=datetime.today())
     img_data = fetchAPOD(date_selection)
-    placeholder = st.empty()
-    # download_button = placeholder.button('Prepare image download?', key="download trigger")
-    
-    # if download_button:
-    #     placeholder.empty()
     download_image(img_data,date_selection)
-    
-  
-# if __name__ == "__main__":
-#     get_nasa_api_photos()
