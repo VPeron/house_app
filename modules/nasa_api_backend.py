@@ -47,15 +47,15 @@ def download_image(img_data,date_selection):
 
 
 def get_nasa_api_photos():
-    
-    date_selection = st.date_input("Select a date for photo of that date?", max_value=datetime.today())
+    st.header("Select a date to fetch photo for that day")
+    date_selection = st.date_input("Date selection", max_value=datetime.today())
     img_data = fetchAPOD(date_selection)
     placeholder = st.empty()
-    download_button = placeholder.button('Prepare image download?', key="download trigger")
+    # download_button = placeholder.button('Prepare image download?', key="download trigger")
     
-    if download_button:
-        placeholder.empty()
-        download_image(img_data,date_selection)
+    # if download_button:
+    #     placeholder.empty()
+    download_image(img_data,date_selection)
     
   
 # if __name__ == "__main__":
