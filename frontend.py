@@ -7,7 +7,7 @@ from modules.crypto_backend import monitor_ranges, plot_data
 from modules.schedule_backend import get_schedule_data, apply_style
 from modules.news_backend import get_news_api, view_sources
 from modules.comdirect_backend import get_comd_data, pre_proc_data ,plot_monthly_data
-
+from modules.nasa_api_backend import get_nasa_api_photos
 
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
 
@@ -122,6 +122,11 @@ def comd_page():
     month_summary = df_month.groupby('Labels').agg('Amount').sum()
     st.write(month_summary)
     plot_monthly_data(month_summary, select_month, select_year)
+    
+def nasa_api():
+    st.title('Photos provided by NASA API.')
+    get_nasa_api_photos()
+    
    
 
 def about_page():
@@ -145,6 +150,7 @@ def main():
         "News": news_page,
         "Crypto Data": crypto_page,
         "Comdirect":comd_page,
+        "Nasa Photos":nasa_api,
         #"About": about_page,
         #"Contact": contact_page,
     }
