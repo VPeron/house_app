@@ -17,14 +17,14 @@ def fetchAPOD(date):
         'hd':'True'
     }
     response = requests.get(URL_APOD,params=params).json()
-    st.write(response)
-    # try:
-    #     st.write(f'Copyrights: {response["copyright"]}')
-    # except KeyError:
-    #     st.write('No copyright available')
-    # st.write(f'Title: {response["title"]}')
-    # st.write(f'Date: {response["date"]}')
-    # st.write(response["explanation"])
+    #st.write(response)
+    try:
+        st.write(f'Copyrights: {response["copyright"]}')
+    except KeyError:
+        st.write('No copyright available')
+    st.write(f'Title: {response["title"]}')
+    st.write(f'Date: {response["date"]}')
+    st.write(response["explanation"])
     
     image_url = response['url']
     st.image(image_url)
