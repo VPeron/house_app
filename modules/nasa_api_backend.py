@@ -1,5 +1,4 @@
 import requests
-from urllib.request import urlretrieve
 from datetime import datetime
 
 import streamlit as st
@@ -31,10 +30,11 @@ def fetchAPOD(date):
     return img_data
     
 def download_image(img_data,date_selection):
-    with open(f'nasa_photos{date_selection}.jpg', 'wb') as handler:
+    file_name = f'nasaapipicture{date_selection}.jpg'
+    with open(file_name, 'wb') as handler:
         img_file = handler.write(img_data)
         
-    with open(f'nasa_photos{date_selection}.jpg', 'rb') as whandler:
+    with open(file_name, 'rb') as whandler:
         dl_btn = st.download_button(
             label="Download image",
             data=whandler.read(img_file),
@@ -44,7 +44,6 @@ def download_image(img_data,date_selection):
 
 
 def get_nasa_api_photos():
-    st.header("Select a date to fetch photo for that day")
-    date_selection = st.date_input("Date selection", max_value=datetime.today())
+    date_selection = st.date_input("Pick a Date", max_value=datetime.today())
     img_data = fetchAPOD(date_selection)
     download_image(img_data,date_selection)

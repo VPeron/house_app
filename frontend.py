@@ -1,6 +1,8 @@
+import logging
+
 import streamlit as st
 import pandas as pd
-import logging
+
 
 from modules.weather_backend import get_weather, get_date_time
 from modules.crypto_backend import monitor_ranges, plot_data
@@ -9,15 +11,11 @@ from modules.news_backend import get_news_api, view_sources
 from modules.comdirect_backend import get_comd_data, pre_proc_data ,plot_monthly_data
 from modules.nasa_api_backend import get_nasa_api_photos
 
+
 FRONT_PASSWORD = st.secrets["FRONT_PASSWORD"]
 
 st.set_page_config(page_title='House Page', page_icon="🔒", layout='centered')
 
-# to configure the logger further you can use basicConfig()
-# but if this gets more complex its better to also implement a handler.
-# logging.basicConfig(filename='request_site_status.log', level=logging.DEBUG,
-#                     format='%(asctime)s:%(name)s:%(message)s')
-# logging.debug(f'Display debug message.')
 
 def front_door():
     session_state = False
@@ -77,7 +75,6 @@ Feels like: {feels_like}\n
                 .blank {display:none}
                 </style>
                 """
-
     # Inject CSS with Markdown
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
     
@@ -129,24 +126,9 @@ def comd_page():
     plot_monthly_data(month_summary, select_month, select_year)
     
 def nasa_api():
-    st.title('Photos provided by NASA API.')
+    st.title('Photos provided by api.nasa.gov API.')
     get_nasa_api_photos()
-    
-   
 
-def about_page():
-    st.title('About')
-    st.sidebar.write('[Github](https://github.com/VPeron/house_app)')
-    st.info("""
-            Family playground.
-            """)
-    st.image("https://wp-media.patheos.com/blogs/sites/576/2088/01/matrix-city.jpg")
-
-
-def contact_page():
-    st.title('Contact')
-    st.info("viperon.python@gmail.com")
-        
 
 def main():
     # Register your pages
