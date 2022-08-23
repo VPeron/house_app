@@ -49,10 +49,7 @@ def front_door():
 
 
 def home_page():
-    date_today, time_now = get_date_time()
     # st.title('☘♡⚤«♚♠ Home Page ♠♚»☮♡☘')
-    st.info(f"{date_today} at {time_now}")
-    
     # WEATHER WIDGET
     city = st.sidebar.selectbox("Select a city", ['Berlin', 'Sao Paulo', 'Alicante'])
     if city:
@@ -68,7 +65,7 @@ Feels like: {feels_like}\n
     
      # SCHEDULE WIDGET
     st.title('Schedule')
-    # CSS inject to remove st default table index
+    # CSS variable to remove streamlit default table index
     hide_table_row_index = """
                 <style>
                 tbody th {display:none}
@@ -131,6 +128,8 @@ def nasa_api():
 
 
 def main():
+    date_today = get_date_time()[0]
+    st.sidebar.info(f"{date_today}")
     # Register your pages
     pages = {
         "Homepage": home_page,
@@ -141,6 +140,7 @@ def main():
         #"About": about_page,
         #"Contact": contact_page,
     }
+    
     
     page = st.sidebar.radio("Select your page", tuple(pages.keys()))
     pages[page]()
