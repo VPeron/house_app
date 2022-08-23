@@ -19,7 +19,12 @@ def highlight_rows(x):
     # overwrite values grey color
     df.iloc[3, :-1] = 'background-color: blue'   # lunch row
     df.iloc[6, :-1] = 'background-color: blue'   # dinner row
-    return df 
+    try:
+        df.iloc[13, :-1] = 'background-color: blue'   # lunch row
+        df.iloc[16, :-1] = 'background-color: blue'   # dinner row
+    except IndexError:
+        pass
+    return df
 
 
 def apply_color(val, text_color, param):
@@ -30,5 +35,5 @@ def apply_color(val, text_color, param):
 def apply_style(df):        
     colored_df = df.style.applymap(apply_color, param='Conny+O', text_color='yellow')\
     .applymap(apply_color, param='Kita', text_color='orange')\
-        .applymap(lambda x: "background-color: green" if x == 'Vini+O' else None).apply(highlight_rows, axis = None) 
+        .applymap(apply_color, param='Vini+O', text_color='green').apply(highlight_rows, axis = None) 
     st.table(colored_df)

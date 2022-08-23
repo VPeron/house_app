@@ -66,9 +66,9 @@ Feels like: {feels_like}\n
             st.error('There was an error (KeyError), please try again.')
             logging.warning('Weather widget Key error.')
     
-    # SCHEDULE WIDGET
+     # SCHEDULE WIDGET
     st.title('Schedule')
-    # CSS to inject to remove table index
+    # CSS inject to remove st default table index
     hide_table_row_index = """
                 <style>
                 tbody th {display:none}
@@ -81,7 +81,7 @@ Feels like: {feels_like}\n
     list_of_lists = get_schedule_data()
     result_table = pd.DataFrame(list_of_lists)
     result_table.columns = [i for i in pd.DataFrame(result_table).T[0]] # insert header as table header
-    apply_style(result_table[1:])  # display styled table without duplicated header
+    apply_style(result_table[1:])  # display styled table without header
     
 
 def news_page():
