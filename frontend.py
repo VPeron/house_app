@@ -120,8 +120,6 @@ def main():
         "Cryptocurrencies": crypto_page,
         "Comdirect":comd_page,
         "Nasa Photos":nasa_api,
-        #"About": about_page,
-        #"Contact": contact_page,
     }
     
     
