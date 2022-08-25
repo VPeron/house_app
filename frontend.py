@@ -8,7 +8,7 @@ from modules.weather_backend import get_weather, get_date_time
 from modules.crypto_backend import monitor_ranges, plot_data
 from modules.schedule_backend import get_schedule_data, apply_style
 from modules.news_backend import get_news_api, view_sources
-from modules.comdirect_backend import get_comd_data, pre_proc_data ,plot_monthly_data
+from modules.comdirect_backend import comdirect_main
 from modules.nasa_api_backend import get_nasa_api_photos
 
 
@@ -103,24 +103,7 @@ def crypto_page():
 
 def comd_page():
     st.sidebar.image('https://is2-ssl.mzstatic.com/image/thumb/Purple113/v4/86/3e/20/863e2097-3761-df35-0537-4ffb77fd8dc3/source/512x512bb.jpg')
-    raw_df = get_comd_data()
-    df = pre_proc_data(raw_df)
-    
-    years_available = set(df['Date'].dt.year.to_list())
-    select_year = st.selectbox('Choose a year', years_available)
-    df_year = df[df['Date'].dt.year == select_year]
-    
-    months_available = set(df_year['Date'].dt.month_name().to_list())
-    select_month = st.selectbox('Choose a month', months_available)
-    df_month = df_year[df_year['Date'].dt.month_name() == select_month]
-    
-    transactions = st.checkbox('View transactions')
-    if transactions:
-        st.write(df_month)
-    st.header('Summary Table')
-    month_summary = df_month.groupby('Labels').agg('Amount').sum()
-    st.write(month_summary)
-    plot_monthly_data(month_summary, select_month, select_year)
+    comdirect_main()
     
 def nasa_api():
     st.title('Photos provided by api.nasa.gov API.')
@@ -134,7 +117,7 @@ def main():
     pages = {
         "Homepage": home_page,
         "News": news_page,
-        "Crypto Data": crypto_page,
+        "Cryptocurrencies": crypto_page,
         "Comdirect":comd_page,
         "Nasa Photos":nasa_api,
         #"About": about_page,
